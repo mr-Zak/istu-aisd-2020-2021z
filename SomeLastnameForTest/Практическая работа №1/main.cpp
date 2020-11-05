@@ -1,2 +1,0 @@
-TEST FILE
-Version 2
