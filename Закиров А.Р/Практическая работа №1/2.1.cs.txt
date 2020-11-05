@@ -1,0 +1,21 @@
+class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Введите первое число: ");
+            int a = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите второе число: ");
+            int b = int.Parse(Console.ReadLine());
+            Console.WriteLine("Выберете операцию(+, -, *, /): ");
+            string oper = Console.ReadLine();
+            if (oper.Equals("+")) Console.WriteLine(a + b);
+            else if (oper.Equals("-")) Console.WriteLine(a - b);
+            else if (oper.Equals("*")) Console.WriteLine(a * b);
+            else if (oper.Equals("/")) {
+                if (a % b != 0) Console.WriteLine((double)a/b);
+                else Console.WriteLine(a / b);
+            }
+           
+            Console.ReadKey();
+        }
+    }
