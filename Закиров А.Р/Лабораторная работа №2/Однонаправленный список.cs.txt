@@ -1,0 +1,222 @@
+using System;
+using System.Collections;
+
+namespace UnidirectionalList
+{
+    public class Item<T>
+    {
+        public T elem;
+        public T Elem
+        {
+            get { return elem; }
+            set { elem = value; }
+        }
+        public Item<T> Next { get; set; }
+        public Item(T elem)
+        {
+            Elem = elem;
+        }
+
+        public override string ToString()
+        {
+            return elem.ToString();
+        }
+
+    }
+
+    public class LinkedList<T> : IEnumerable
+    {
+        public Item<T> Head { get; set; }
+        public Item<T> Tail { get; set; }
+        public int count { get; set; }
+        public LinkedList()
+        {
+            Head = null;
+            Tail = null;
+            count = 0;
+        }
+
+        public LinkedList(T elem)
+        {
+            var item = new Item<T>(elem);
+            Head = item;
+            Tail = item;
+            count = 1;
+        }
+
+        public void AddNewElem(T elem)
+        {
+            var item = new Item<T>(elem);
+            if (Tail != null)
+            {
+                Tail.Next = item;
+                Tail = item;
+                count++;
+            }
+            else
+            {
+                Head = item;
+                Tail = item;
+                count = 1;
+            }
+        }
+
+        public void Remove(T elem)
+        {
+            if(Head != null)
+            {
+                if (Head.Elem.Equals(elem))
+                {
+                    Head = Head.Next;
+                    count--;
+                    return;
+                }
+                var curent = Head.Next;
+                var previos = Head;
+                while(curent != null)
+                {
+                    if (curent.Elem.Equals(elem))
+                    {
+                        previos.Next = curent.Next;
+                        count--;
+                        return;
+                    }
+                    previos = curent;
+                    curent = curent.Next;
+                }
+            } 
+        }
+
+        public void InsertAfter(T target, T elem)
+        {
+            if (Head != null)
+            {
+                var curent = Head;
+                var item = new Item<T>(elem);
+                while (curent != null)
+                {
+                    if (curent.Elem.Equals(target))
+                    {
+                        item.Next = curent.Next;
+                        curent.Next = item;
+                        count++;
+                        return;
+                    }
+                    else
+                    {
+                        curent = curent.Next;
+                    }
+                }
+            }
+               
+        }
+
+        public void InsertBeforeIndex(int index, T elem)
+        {
+            if (Head != null)
+            {
+                var curent = Head.Next;
+                var previos = Head;
+                if(index == 0)
+                {
+                    var item = new Item<T>(elem);
+                    item.Next = Head;
+                    Head = item;
+                    if (count == 0) Tail = Head;
+                    count++;
+                }
+                else if(index < count)
+                {
+                    int i = 1;
+                    while (i < index)
+                    {
+                            previos = curent;
+                            curent = curent.Next;
+                            i++;
+                    }
+                    var insertBeforeElem = previos.Elem;
+                    InsertAfter(insertBeforeElem, elem);
+                    return;
+                }
+                else if(index == count)
+                {
+                    AddNewElem(elem);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            Head = null;
+            Tail = null;
+            count = 0;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            var data = Head;
+            while(data != null)
+            {
+                yield return data.Elem;
+                data = data.Next;
+            }
+        }
+
+        public void Print(int index, LinkedList<int> list)
+        {
+            int i = 0;
+            foreach(var item in list)
+            {
+                if (i == index)
+                {
+                    Console.WriteLine(item);
+                    break;
+                }
+                i++;
+            }
+        }
+
+    }
+    class Program
+    {
+        private static void Main(string[] args)
+        {
+            var list = new LinkedList<int>();
+            list.AddNewElem(1);
+            list.AddNewElem(2);
+            list.AddNewElem(3);
+            list.AddNewElem(4);
+            list.AddNewElem(5);
+            foreach(var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            list.Remove(2);
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            list.InsertBeforeIndex(0, 8);
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            list.InsertAfter(8, 22);
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            list.Print(3, list);
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.ReadLine();
+            list.Clear();
+        }
+    }
+}
