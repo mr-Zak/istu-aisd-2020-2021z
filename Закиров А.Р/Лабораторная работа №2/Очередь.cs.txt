@@ -1,0 +1,130 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Queue
+{
+    public class Item<T>
+    {
+        public Item(T data){
+            Data = data;
+        }
+
+        public T Data { get; set; }
+        public Item<T> Next { get; set; }
+    }
+    public class Queue<T> : IEnumerable<T>
+    {
+        Item<T> head;
+        Item<T> tail;
+        int count;
+        public void AddToQueue(T data)
+        {
+            Item<T> item = new Item<T>(data);
+            Item<T> tempItem = tail;
+            tail = item;
+            if (count == 0) head = tail;
+            else tempItem.Next = tail;
+            count++;
+        }
+
+        public void DeleteToFirstElement()
+        {
+            if (count == 0) Console.WriteLine("В очереди нет элементов!");
+            else
+            {
+                var deletedElem = head.Data;
+                head = head.Next;
+                count--;
+                Console.WriteLine("Первый элемент со значением " + deletedElem + " удален!");
+            }
+        }
+
+        public Queue<T> Clone(Queue<T> queue)
+        {
+            Queue<T> clone = new Queue<T>();
+            if (count != 0)
+            {
+                var first = queue.head;
+                var next = queue.head.Next;
+                while (first != null)
+                {
+                    clone.AddToQueue(first.Data);
+                    first = first.Next;
+                }
+                return clone;
+            }
+            else return clone;
+        }
+
+        public void Clear(Queue<T> queue)
+        {
+            queue.head = null;
+            queue.tail = null;
+            queue.count = 0;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            Item<T> curent = head;
+            while(curent != null)
+            {
+                yield return curent.Data;
+                curent = curent.Next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)this).GetEnumerator();
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Queue<int> qq = new Queue<int>();
+            qq.AddToQueue(1);
+            qq.AddToQueue(2);
+            qq.AddToQueue(3);
+            qq.AddToQueue(4);
+            foreach(var elem in qq)
+            {
+                Console.Write(elem + " ");
+            }
+            Console.WriteLine();
+            qq.DeleteToFirstElement();
+            qq.DeleteToFirstElement();
+            foreach (var elem in qq)
+            {
+                Console.Write(elem + " ");
+            }
+            Console.WriteLine();
+            Queue<int> newQ = qq.Clone(qq);
+            foreach (var elem in newQ)
+            {
+                Console.Write(elem + " ");
+            }
+            Console.WriteLine();
+            newQ.AddToQueue(10);
+            foreach (var elem in qq)
+            {
+                Console.Write(elem + " ");
+            }
+            Console.WriteLine();
+            foreach (var elem in newQ)
+            {
+                Console.Write(elem + " ");
+            }
+            qq.Clear(qq);
+            foreach (var elem in qq)
+            {
+                Console.Write(elem + " ");
+            }
+            Console.WriteLine();
+            foreach (var elem in newQ)
+            {
+                Console.Write(elem + " ");
+            }
+        }
+    }
+}
