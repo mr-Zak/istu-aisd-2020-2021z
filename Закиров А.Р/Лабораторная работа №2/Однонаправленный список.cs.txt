@@ -3,79 +3,69 @@ using System.Collections;
 
 namespace UnidirectionalList
 {
-    public class Item<T>
+    public class Item
     {
-        public T elem;
-        public T Elem
+        public int Value { get; set; }
+        public Item Next { get; set; }
+
+
+        public Item(int value)
         {
-            get { return elem; }
-            set { elem = value; }
-        }
-        public Item<T> Next { get; set; }
-        public Item(T elem)
-        {
-            Elem = elem;
+            Value = value;
+            Next = null;
         }
 
-        public override string ToString()
+
+        public Item(int value, Item next): this(value)
         {
-            return elem.ToString();
+            Next = next;
         }
 
     }
 
     public class LinkedList<T> : IEnumerable
     {
-        public Item<T> Head { get; set; }
-        public Item<T> Tail { get; set; }
-        public int count { get; set; }
+        private Item head;
+        private Item tail;
+        public int count;
+
         public LinkedList()
         {
-            Head = null;
-            Tail = null;
-            count = 0;
+           head = null;
+           tail = null;
+           count = 0;
         }
 
-        public LinkedList(T elem)
+        public void AddNewElem(int elem)
         {
-            var item = new Item<T>(elem);
-            Head = item;
-            Tail = item;
-            count = 1;
+           var item = new Item(elem);
+           if(head == null)
+           {
+                head = item;
+           }
+           else
+           {
+                tail.Next = item;
+           }
+           tail = item;
+           count++;
         }
 
-        public void AddNewElem(T elem)
+        public void Remove(int elem)
         {
-            var item = new Item<T>(elem);
-            if (Tail != null)
+            if(head != null)
             {
-                Tail.Next = item;
-                Tail = item;
-                count++;
-            }
-            else
-            {
-                Head = item;
-                Tail = item;
-                count = 1;
-            }
-        }
-
-        public void Remove(T elem)
-        {
-            if(Head != null)
-            {
-                if (Head.Elem.Equals(elem))
+                if (head.Value.Equals(elem))
                 {
-                    Head = Head.Next;
+                    head = head.Next;
                     count--;
                     return;
                 }
-                var curent = Head.Next;
-                var previos = Head;
+                var curent = head.Next;
+                var previos = head;
                 while(curent != null)
                 {
-                    if (curent.Elem.Equals(elem))
+                    if (curent.Value.Equals(elem))
                     {
                         previos.Next = curent.Next;
                         count--;
@@ -87,15 +77,15 @@ namespace UnidirectionalList
             } 
         }
 
-        public void InsertAfter(T target, T elem)
+        public void InsertAfter(int target, int elem)
         {
-            if (Head != null)
+            if (head != null)
             {
-                var curent = Head;
-                var item = new Item<T>(elem);
+                var curent = head;
+                var item = new Item(elem);
                 while (curent != null)
                 {
-                    if (curent.Elem.Equals(target))
+                    if (curent.Value.Equals(target))
                     {
                         item.Next = curent.Next;
                         curent.Next = item;
@@ -111,18 +101,18 @@ namespace UnidirectionalList
                
         }
 
-        public void InsertBeforeIndex(int index, T elem)
+        public void InsertBeforeIndex(int index, int elem)
         {
-            if (Head != null)
+            if (head != null)
             {
-                var curent = Head.Next;
-                var previos = Head;
+                var curent = head.Next;
+                var previos = head;
                 if(index == 0)
                 {
-                    var item = new Item<T>(elem);
-                    item.Next = Head;
-                    Head = item;
-                    if (count == 0) Tail = Head;
+                    var item = new Item(elem);
+                    item.Next = head;
+                    head = item;
+                    if (count == 0) head = head.Next;
                     count++;
                 }
                 else if(index < count)
@@ -134,7 +124,7 @@ namespace UnidirectionalList
                             curent = curent.Next;
                             i++;
                     }
-                    var insertBeforeElem = previos.Elem;
+                    var insertBeforeElem = previos.Value;
                     InsertAfter(insertBeforeElem, elem);
                     return;
                 }
@@ -147,36 +137,54 @@ namespace UnidirectionalList
 
         public void Clear()
         {
-            Head = null;
-            Tail = null;
+            head = null;
             count = 0;
         }
 
         public IEnumerator GetEnumerator()
         {
-            var data = Head;
+            var data = head;
             while(data != null)
             {
-                yield return data.Elem;
+                yield return data.Value;
                 data = data.Next;
             }
         }
 
-        public void Print(int index, LinkedList<int> list)
+        public int GetElementByIndex(int index)
         {
-            int i = 0;
-            foreach(var item in list)
+            if (head != null)
             {
-                if (i == index)
+                var curent = head.Next;
+                var previos = head;
+                if(index == 0)
                 {
-                    Console.WriteLine(item);
-                    break;
+                    Console.WriteLine(previos.Value);
+                    return previos.Value;
                 }
-                i++;
+                else if(index <= count-1)
+                {
+                    int i = 0;
+                    while (i < index)
+                    {
+                        previos = curent;
+                        curent = curent.Next;
+                        i++;
+                    }        
+                    Console.WriteLine(previos.Value);
+                    return previos.Value;
+                }
+                else
+                {
+                    Console.WriteLine("Элемента с индексом " + index + " не существует!");
+                }   //return previos.Value;
             }
-        }
-
+            else Console.WriteLine("Список пуст");
+            return 0;
+        } 
     }
+
+
     class Program
     {
         private static void Main(string[] args)
@@ -198,7 +206,7 @@ namespace UnidirectionalList
                 Console.Write(item + " ");
             }
             Console.WriteLine();
-            list.InsertBeforeIndex(0, 8);
+             list.InsertBeforeIndex(0, 8);
             foreach (var item in list)
             {
                 Console.Write(item + " ");
@@ -210,13 +218,13 @@ namespace UnidirectionalList
                 Console.Write(item + " ");
             }
             Console.WriteLine();
-            list.Print(3, list);
+            list.GetElementByIndex(6);
+            list.GetElementByIndex(1);
+            list.Clear();
             foreach (var item in list)
             {
                 Console.Write(item + " ");
             }
-            Console.ReadLine();
-            list.Clear();
         }
     }
 }
