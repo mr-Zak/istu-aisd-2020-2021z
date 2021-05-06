@@ -1,0 +1,10 @@
+D:\C#\source\repos\ShortWayApp\ShortWayApp\bin\Debug\ShortWayApp.exe.config
+D:\C#\source\repos\ShortWayApp\ShortWayApp\bin\Debug\ShortWayApp.exe
+D:\C#\source\repos\ShortWayApp\ShortWayApp\bin\Debug\ShortWayApp.pdb
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.csprojAssemblyReference.cache
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.Form1.resources
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.Properties.Resources.resources
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.csproj.GenerateResource.cache
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.csproj.CoreCompileInputs.cache
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.exe
+D:\C#\source\repos\ShortWayApp\ShortWayApp\obj\Debug\ShortWayApp.pdb
