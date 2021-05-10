@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShortWayApp.Graph">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAACAAAACAAEAAAAAAAAAA=</HashCode>
+      <FileName>Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortWayApp.GraphVertex">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAECAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphVertex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortWayApp.GraphEdge">
+    <Position X="3.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphEdge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortWayApp.GraphVertexInfo">
+    <Position X="5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAIBAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphVertexInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortWayApp.Dijkstra">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAACAAQAAAAAACAACABAAAAAAAAEAAQA=</HashCode>
+      <FileName>Dijkstra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortWayApp.Program">
+    <Position X="7.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIAAAAAAAAAACAAAABAAAgAAIAAAABJAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

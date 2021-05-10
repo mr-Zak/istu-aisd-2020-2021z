@@ -1,0 +1,16 @@
+AB = 10
+AC = 17
+AD = 9
+BA = 10
+BC = 8
+BD = 15
+CA = 17
+CB = 8
+CD = 10
+CE = 7
+DA = 9
+DB = 15
+DC = 10
+EC = 7
+EF = 8
+FE = 8
